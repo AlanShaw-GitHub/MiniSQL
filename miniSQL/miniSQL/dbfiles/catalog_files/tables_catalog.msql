@@ -1,0 +1,1 @@
+{"sys": {"primary_key": 0, "columns": {"username": [true, "char", 16], "password": [false, "char", 16]}}, "student": {"primary_key": 0, "columns": {"num": [true, "int", 0], "val": [false, "char", 10]}}}

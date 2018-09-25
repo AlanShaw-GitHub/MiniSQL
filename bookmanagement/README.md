@@ -1,8 +1,8 @@
 #实验 5 数据库程序设计
 
-| 姓名   | 学号       | 指导老师 | 日期      |
-| ------ | ---------- | -------- | --------- |
-| 肖振新 | 3160104243 | 高云君   | 2018.6.10 |
+| 姓名   | 学号 | 指导老师 | 日期      |
+| ------ | ---- | -------- | --------- |
+| 肖振新 | *    | 高云君   | 2018.6.10 |
 
 ##一、实验目的
 
@@ -22,7 +22,7 @@ Jetbrains DataGrip、Debian Linux OS 9(MySQL server)、MySQL Plugin For .NET fra
 
 本程序是在Windows平台下开发的简易图书管理系统，我也不太擅长花很多时间在写长篇大论的报告上，所以本报告也会写的比较简洁，主要以贴图为主。。
 
-<img src="IMG_9359.jpg" width="900px" align=center />
+<img src="./jpg/IMG_9359.jpg" width="900px" align=center />
 
 前端采用Windows UWP开发包进行设计，主窗口采用了Windows 2017 fall creator update（Windows秋季创意者更新）中新引入的navigation bar控件进行导航，这也是Windows内置应用（如设置）和众多Windows应用商店所采用的窗口导航方案，总体背景使用了transparent的透明亚克力，使得程序使用更加流畅。安装卸载都如同Windows应用商店的程序那样便捷。数据表的展示使用了telerik UI for ASP.NET，数据展示十分自然完整。
 
@@ -74,15 +74,15 @@ Jetbrains DataGrip、Debian Linux OS 9(MySQL server)、MySQL Plugin For .NET fra
 
 navigation bar和透明毛玻璃效果时也是微软对新的UI布局方案一次尝试，笔者注意到，在最新的WWDC 2018苹果全球开发者大会上，新版本的macOS mojave的一些内置程序如“新闻、应用商店”等也采用了类似于Windows uwp的窗口布局方案，这也与本程序的高度一致。如下图所示：
 
-<img src="2.png" width="600px" align=center />
+<img src="./jpg/2.png" width="600px" align=center />
 
 当然，作为一个数据库作业，最为重要的还是后端数据库逻辑的设计，本实验和数据库理论联系最为密切的应该就是于后端数据库的连接和数据表data schema的设计了。本程序连接后端或者云端的mysql数据库使用的是c#版本的mysql connector，由mysql官方发布，专门为Microsoft .NET framwork框架开发，相应的visual studio集成驱动的下载官网链接为https://dev.mysql.com/downloads/connector/net/，如下图所示：
 
-<img src="3.png" width="600px" align=center />
+<img src="./jpg/3.png" width="600px" align=center />
 
 数据表的内容在前面也已经列表说明了，主要就是三个数据表，books表存的就是图书的信息，包括图书编号、图书名等等关于本图书的各种信息，在用户登录的情况下可以进行借书操作。users表存的是用户的信息，包括用户账号密码、姓名和联系方式，user表在**管理员账号**下可以进行修改，然后新的用户可以登录借书。连接这两个表的就是借书记录了，借书记录主要包含了借的人的编号，图书编号和出借/归还日期，注意这里的主码是（图书编号+用户编号+出借日期），因为同一本书的库存可能不止一本，用户也可能借很多本这个书（尽管不大可能）。
 
-<img src="4.png" width="600px" align=center />
+<img src="./jpg/4.png" width="600px" align=center />
 
 ### 代码一览
 
@@ -90,15 +90,15 @@ navigation bar和透明毛玻璃效果时也是微软对新的UI布局方案一�
 
 前端代码使用xaml设计：
 
-<img src="7.png" width="600px" align=center />
+<img src="./jpg/7.png" width="600px" align=center />
 
 后端逻辑当然使用微软亲生的c#了：
 
-<img src="18.png" width="600px" align=center />
+<img src="./jpg/18.png" width="600px" align=center />
 
 another：
 
-<img src="19.png" width="600px" align=center />
+<img src="./jpg/19.png" width="600px" align=center />
 
 ##四、详细设计
 
@@ -108,73 +108,73 @@ another：
 
 右上角有两个按钮，刷新按钮在按下后会重新连接数据库并取回新的数据，用户登录按钮按下后会弹出新的窗口，并提示进行用户的登录。登录后可以进行借书操作。
 
-<img src="IMG_9360.jpg" width="600px" align=center />
+<img src="./jpg/IMG_9360.jpg" width="600px" align=center />
 
 点击右上角的用户登录，弹出新的窗口，如果输入账号或者密码错误，则会提示，登录不成功。如下图所示：
 
-<img src="5.jpg" width="600px" align=center />
+<img src="./jpg/5.jpg" width="600px" align=center />
 
 ### 2· 图书借阅模块
 
 在上方的搜索栏输入对应的信息进行搜索，下面会自动弹出满足条件的图书，选中、点击借阅即可。
 
-<img src="IMG_9366.jpg" width="600px" align=center />
+<img src="./jpg/IMG_9366.jpg" width="600px" align=center />
 
 如果没有登录，或者没有选中该图书、该书库存不足，则会报错，借阅不成功：
 
-<img src="6.jpg" width="600px" align=center />
+<img src="./jpg/6.jpg" width="600px" align=center />
 
 如果借阅成功，一条新的记录会被导入到record表中，**并且该书库存减1**.
 
-<img src="8.jpg" width="600px" align=center />
+<img src="./jpg/8.jpg" width="600px" align=center />
 
 ### 3· 图书归还模块
 
 好了，现在在上一步骤中借到书已经添加到records中了，我们到图书归还模块中去查看（这是归还完成时的界面）：
 
-<img src="10.jpg" width="600px" align=center />
+<img src="./jpg/10.jpg" width="600px" align=center />
 
 我们可以点击归还该书：
 
-<img src="9.jpg" width="600px" align=center />
+<img src="./jpg/9.jpg" width="600px" align=center />
 
 ### 4· 图书入库/添加用户模块
 
 在这里，只有登录了管理员才可以进行操作，如果登录了管理员，**那么左上角会显示管理员字样**
 
-<img src="IMG_9362.jpg" width="600px" align=center />
+<img src="./jpg/IMG_9362.jpg" width="600px" align=center />
 
 如果没有登录管理员，则不具有管理员权限，那么在试图操作时会报错：
 
-<img src="IMG_9365.jpg" width="600px" align=center />
+<img src="./jpg/IMG_9365.jpg" width="600px" align=center />
 
 我们现在登录管理员账号，导入新图书：
 
-<img src="IMG_9365.jpg" width="600px" align=center />
+<img src="./jpg/IMG_9365.jpg" width="600px" align=center />
 
 然后顺便尝试一下添加新用户：
 
-<img src="12.jpg" width="600px" align=center />
+<img src="./jpg/12.jpg" width="600px" align=center />
 
 ### 5· 用户管理模块
 
 好了，在上一步骤中添加的新用户，可以在用户管理界面进行查看和删除了，同样，如果没有登录管理员，那么跳转到这个界面的时候什么也看不到～
 
-<img src="13.jpg" width="600px" align=center />
+<img src="./jpg/13.jpg" width="600px" align=center />
 
 然后我们选择一个用户，删除掉它：
 
-<img src="14.jpg" width="600px" align=center />
+<img src="./jpg/14.jpg" width="600px" align=center />
 
 这时候，我们可以看到，这个用户已经人间蒸发了：
 
-<img src="15.jpg" width="600px" align=center />
+<img src="./jpg/15.jpg" width="600px" align=center />
 
 ### 6·管理员/用户登录模块
 
 这里是管理员登录弹窗，注意的是和在主界面的用户登录界面基本相似，但是职能不同。只有在这里登录了，才可以进行上面的图书入库/用户添加删除操作。
 
-<img src="IMG_9363.jpg" width="600px" align=center />
+<img src="./jpg/IMG_9363.jpg" width="600px" align=center />
 
 
 
@@ -182,14 +182,14 @@ another：
 
 设置模块在第一次启动本程序的时候会自动跳转到这里，并且如果没有在这里选择一个数据库源的话，即使点击左侧栏目的其他窗口，也会弹窗报错，提示无法连接数据库。在第一次打开本程序并选择一个方式初始化数据库后，该信息会保存在windows缓存中，接下来打开本程序都不需要再次设置，并且会自动跳转到首页作为默认的界面。
 
-<img src="IMG_9281.jpg" width="600px" align=center />
+<img src="./jpg/IMG_9281.jpg" width="600px" align=center />
 
 如果选择本地连接，且之前已经创建好了一个数据库，那么惦记连接到现有的数据库，否则，点击新建一个数据库：
 
-<img src="16.jpg" width="600px" align=center />
+<img src="./jpg/16.jpg" width="600px" align=center />
 
 如果希望连接到一个远程的数据库，那么点击下面的连接到云端数据库（注意：由于网络延迟，服务器在国外（你懂的），所以每次交互需要的时间可能较长，在我的电脑上实际测试，每个操作大概都有一秒左右的延迟）：
 
-<img src="17.jpg" width="600px" align=center />
+<img src="./jpg/17.jpg" width="600px" align=center />
 
 同理，也可以连接到程序自带的minisql数据库。
