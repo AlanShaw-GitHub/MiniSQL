@@ -573,6 +573,7 @@ def insert_into_parent(table,__node,__key,new_node):
                 if __key < key:
                     p.keys.insert(index,__key)
                     p.pointers.insert(index+1,new_node)
+                    seed = True
                     break
             if seed == False:
                 p.keys.append(__key)
